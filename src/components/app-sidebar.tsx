@@ -1,67 +1,84 @@
-import { ChartArea, Home, BookOpenText, Calendar, Settings } from "lucide-react"
+"use client"
 
+import * as React from "react"
+import {
+    LayoutDashboard,
+    FilePlus,
+    Library,
+    BookOpen,
+    Wind,
+} from "lucide-react"
+
+import { NavMain } from "@/components/nav-main"
+import { NavUser } from "@/components/nav-user"
+import { ThemeToggle } from "@/components/ThemeToggle"
 import {
     Sidebar,
     SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
+    SidebarFooter,
+    SidebarHeader,
+    SidebarRail,
     SidebarMenu,
-    SidebarMenuButton,
     SidebarMenuItem,
+    SidebarMenuButton,
 } from "@/components/ui/sidebar"
 
-// Menu items.
-const items = [
-    {
-        title: "Dashboard",
-        url: "#",
-        icon: Home,
+// This is sample data.
+const data = {
+    user: {
+        name: "Some User",
+        email: "SomeUser@example.com",
+        avatar: "/avatars/user.jpg",
     },
-    {
-        title: "New Solution",
-        url: "#",
-        icon: BookOpenText,
-    },
-    {
-        title: "Charts",
-        url: "#",
-        icon: ChartArea,
-    },
-    {
-        title: "Calendar",
-        url: "#",
-        icon: Calendar ,
-    },
-    {
-        title: "Settings",
-        url: "#",
-        icon: Settings,
-    },
-]
+    navMain: [
+        {
+            title: "Dashboard",
+            url: "#",
+            icon: LayoutDashboard,
+        },
+        {
+            title: "New Solution",
+            url: "#",
+            icon: FilePlus,
+        },
+        {
+            title: "Library",
+            url: "#",
+            icon: Library,
+        },
+        {
+            title: "Documentation",
+            url: "#",
+            icon: BookOpen,
+        },
+    ],
+}
 
-export function AppSidebar() {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
-        <Sidebar>
+        <Sidebar collapsible="icon" {...props}>
+            <SidebarHeader>
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton size="lg" className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
+                            <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                                <Wind className="size-4" />
+                            </div>
+                            <div className="grid flex-1 text-left text-sm leading-tight">
+                                <span className="truncate font-semibold">SWSD App</span>
+                            </div>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                </SidebarMenu>
+            </SidebarHeader>
             <SidebarContent>
-                <SidebarGroup>
-                    <SidebarGroupLabel>Solar Winds Service Desk APP</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            {items.map((item) => (
-                                <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
-                                        <a href={item.url}>
-                                            <item.icon />
-                                            <span>{item.title}</span>
-                                        </a>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
+                <NavMain items={data.navMain} />
+                <ThemeToggle />
             </SidebarContent>
+            <SidebarFooter>
+                <NavUser user={data.user} />
+            </SidebarFooter>
+            <SidebarRail />
         </Sidebar>
     )
 }
