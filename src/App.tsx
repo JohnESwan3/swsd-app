@@ -1,14 +1,17 @@
 import "./App.css";
-import {Button} from "@/components/ui/button"
+import {SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar.tsx";
+import {AppSidebar} from "@/components/app-sidebar"
 
-function App() {
+function App({ children }: { children: React.ReactNode }) {
 
   return (
-    <main>
-        <div className="flex min-h-svh flex-col items-center justify-center">
-            <Button>Click Me</Button>
-        </div>
-    </main>
+      <SidebarProvider>
+          <AppSidebar />
+        <main>
+          <SidebarTrigger/>
+          {children}
+        </main>
+      </SidebarProvider>
   );
 }
 
