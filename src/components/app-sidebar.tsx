@@ -1,12 +1,9 @@
-"use client"
-
 import * as React from "react"
 import {
     LayoutDashboard,
     FilePlus,
-    Library,
-    BookOpen,
     Wind,
+    Settings, ChartArea,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -33,24 +30,24 @@ const data = {
     navMain: [
         {
             title: "Dashboard",
-            url: "#",
+            url: "/",
             icon: LayoutDashboard,
         },
         {
             title: "New Solution",
-            url: "#",
+            url: "/new-solution",
             icon: FilePlus,
         },
         {
-            title: "Library",
-            url: "#",
-            icon: Library,
+            title: "Charts",
+            url: "/charts",
+            icon: ChartArea,
         },
         {
-            title: "Documentation",
-            url: "#",
-            icon: BookOpen,
-        },
+            title: "Settings",
+            url: "/settings",
+            icon: Settings,
+        }
     ],
 }
 
