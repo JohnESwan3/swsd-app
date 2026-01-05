@@ -10,9 +10,20 @@ export function useIsMobile() {
     const onChange = () => {
       setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
     }
+
+    // Listen for media query changes
     mql.addEventListener("change", onChange)
+
+    // Also listen for window resize events (important for Tauri/desktop apps)
+    window.addEventListener("resize", onChange)
+
+    // Set initial value
     setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
-    return () => mql.removeEventListener("change", onChange)
+
+    return () => {
+      mql.removeEventListener("change", onChange)
+      window.removeEventListener("resize", onChange)
+    }
   }, [])
 
   return !!isMobile

@@ -223,4 +223,120 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Custom scrollbar styling */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.552 0.016 285.938) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: oklch(0.552 0.016 285.938);
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: oklch(0.705 0.015 286.067);
+  }
+
+  .dark *::-webkit-scrollbar-thumb {
+    background-color: oklch(0.705 0.015 286.067);
+  }
+
+  .dark *::-webkit-scrollbar-thumb:hover {
+    background-color: oklch(0.552 0.016 285.938);
+  }
+
+  /* Accent color customization */
+  :root {
+    --accent: 37 99 235;
+    --accent-from: 37 99 235;
+    --accent-to: 99 102 241;
+  }
+
+  /* Card hover borders with accent gradient */
+  [data-slot="card"] {
+    transition: border 0.3s ease-in-out, background 0.3s ease-in-out;
+  }
+
+  [data-slot="card"]:hover {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--card), var(--card)) padding-box,
+      linear-gradient(135deg, rgb(var(--accent) / 0.5), rgb(var(--accent) / 0.2)) border-box;
+    border-radius: var(--radius-xl);
+  }
+
+  /* Active input borders with accent gradient */
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: rgb(var(--accent) / 0.6);
+    box-shadow: 0 0 0 3px rgb(var(--accent) / 0.15);
+  }
+
+  /* Switch accent when checked */
+  button[data-state="checked"] {
+    background: linear-gradient(135deg, rgb(var(--accent)), rgb(var(--accent) / 0.85)) !important;
+  }
+
+  /* Primary button gradient */
+  button[data-slot="button"]:not([data-variant]):not([data-variant="ghost"]):not([data-variant="outline"]):not([data-variant="secondary"]),
+  button.bg-primary {
+    background: linear-gradient(135deg, rgb(var(--accent)), rgb(var(--accent) / 0.9));
+    color: white !important;
+  }
+
+  button[data-slot="button"]:not([data-variant]):not([data-variant="ghost"]):not([data-variant="outline"]):not([data-variant="secondary"]):hover,
+  button.bg-primary:hover {
+    background: linear-gradient(135deg, rgb(var(--accent) / 0.9), rgb(var(--accent) / 0.8));
+    color: white !important;
+  }
+
+  /* Ensure button text and icons are white */
+  button[data-slot="button"]:not([data-variant]):not([data-variant="ghost"]):not([data-variant="outline"]):not([data-variant="secondary"]) *,
+  button.bg-primary * {
+    color: white !important;
+  }
+
+  /* Destructive button (trash) with accent */
+  button[data-variant="destructive"] {
+    background: linear-gradient(135deg, rgb(220 38 38), rgb(185 28 28));
+    color: white !important;
+  }
+
+  button[data-variant="destructive"]:hover {
+    background: linear-gradient(135deg, rgb(239 68 68), rgb(220 38 38));
+    color: white !important;
+  }
+
+  button[data-variant="destructive"] * {
+    color: white !important;
+  }
+
+  /* App icon background with striking gradient */
+  .bg-sidebar-primary,
+  [class*="bg-sidebar-primary"] {
+    background: linear-gradient(135deg, rgb(var(--accent-from)), rgb(var(--accent-to))) !important;
+  }
+
+  /* User avatar/initials background with striking gradient */
+  [data-slot="avatar"],
+  .avatar-background {
+    background: linear-gradient(135deg, rgb(var(--accent-from)), rgb(var(--accent-to))) !important;
+  }
+
+  /* Active sidebar menu button icon with accent color */
+  [data-slot="sidebar-menu-button"][data-active="true"] svg {
+    color: rgb(var(--accent)) !important;
+    stroke: rgb(var(--accent)) !important;
+  }
 }
