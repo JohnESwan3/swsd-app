@@ -1,5 +1,5 @@
 import "./App.css";
-import {SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar.tsx";
+import {SidebarProvider, SidebarTrigger, SidebarInset} from "@/components/ui/sidebar.tsx";
 import {AppSidebar} from "@/components/app-sidebar"
 import {ThemeProvider} from "@/components/theme-provider.tsx";
 import { useState, useEffect } from "react";
@@ -19,10 +19,10 @@ function App({ children }: { children: React.ReactNode }) {
 
       <SidebarProvider open={sidebarOpen} onOpenChange={setSidebarOpen}>
           <AppSidebar />
-        <main>
+        <SidebarInset>
           <SidebarTrigger/>
           {children}
-        </main>
+        </SidebarInset>
       </SidebarProvider>
       </ThemeProvider>
   );
